@@ -1,5 +1,5 @@
 {
-   "name": "@zaadevofc/libproto",
+  "name": "@zaadevofc/libproto",
   "version": "1.0.0",
   "type": "module",
   "repository": {
@@ -7,15 +7,25 @@
   },
   "license": "MIT",
   "author": "zaadevofc",
-  "main": "lib/index.js",
+  "main": "lib/index.cjs",
+  "module": "lib/index.mjs",
   "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.cjs",
+      "types": "./lib/index.d.ts"
+    }
+  },
   "files": [
     "lib/**/*",
     "WAProto/**/*",
     "engine-requirements.js"
   ],
   "scripts": {
-     "build": "rolldown -c",
+    "build": "pnpm run build:types && pnpm run build:js",
+    "build:js": "rolldown -c",
+    "build:types": "tsc --emitDeclarationOnly",
     "r:patch": "npm run build && npm version patch && npm publish --access public",
     "r:minor": "npm run build && npm version minor && npm publish --access public",
     "r:major": "npm run build && npm version major && npm publish --access public"
@@ -35,6 +45,9 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.31.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-node-resolve": "^16.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^20.9.0",
     "@types/ws": "^8.0.0",
@@ -58,6 +71,7 @@
     "prettier": "^3.5.3",
     "protobufjs-cli": "^1.1.3",
     "release-it": "^15.10.3",
+    "rolldown": "1.0.0-beta.52",
     "ts-jest": "^29.4.0",
     "tsc-esm-fix": "^3.1.2",
     "tsx": "^4.20.3",
@@ -80,7 +94,7 @@
       "optional": true
     }
   },
-  "packageManager": "yarn@4.9.2",
+  "packageManager": "pnpm@10.24.0",
   "engines": {
     "node": ">=20.0.0"
   }
