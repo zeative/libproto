@@ -29,6 +29,7 @@
     "cache-manager": "^5.7.6",
     "libphonenumber-js": "^1.10.20",
     "lodash": "^4.17.21",
+    "lru-cache": "^11.2.4",
     "music-metadata": "^7.12.3",
     "pino": "^9.6",
     "protobufjs": "^6.11.3",
